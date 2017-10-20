@@ -1,0 +1,63 @@
+{
+    "updated": 1427245911.525,
+    "created": 1427245911.525,
+    "pipelineVersion": 1,
+    "pipelineName": "MyFirstPipeline",
+    "stageStates": [
+        {
+            "actionStates": [
+                {
+                    "actionName": "Source",
+                    "entityUrl": "https://console.aws.amazon.com/s3/home?#",
+                    "latestExecution": {
+                        "status": "Succeeded",
+                        "lastStatusChange": 1427298837.768
+                    }
+                }
+            ],
+            "stageName": "Source"
+        },
+        {
+            "actionStates": [
+                {
+                    "actionName": "Deploy-CodeDeploy-Application",
+                    "entityUrl": "https://console.aws.amazon.com/codedeploy/home?#",
+                    "latestExecution": {
+                        "status": "Succeeded",
+                        "lastStatusChange": 1427298939.456,
+                        "externalExecutionUrl": "https://console.aws.amazon.com/?#",
+                        "externalExecutionId": "c53dbd42-This-Is-An-Example",
+                        "summary": "Deployment Succeeded"
+                    }
+                }
+            ],
+            "inboundTransitionState": {
+                "enabled": true
+            },
+            "stageName": "Staging"
+        },
+        {
+            "actionStates": [
+                {
+                    "actionName": "Deploy-Second-Deployment",
+                    "entityUrl": "https://console.aws.amazon.com/codedeploy/home?#",
+                    "latestExecution": {
+                        "status": "Failed",
+                        "errorDetails": {
+                            "message": "Deployment Group is already deploying deployment ...",
+                            "code": "JobFailed"
+                        },
+                        "lastStatusChange": 1427246155.648
+                    }
+                }
+            ],
+            "inboundTransitionState": {
+                "disabledReason": "Disabled while I investigate the failure",
+                "enabled": false,
+                "lastChangedAt": 1427246517.847,
+                "lastChangedBy": "arn:aws:iam::80398EXAMPLE:user/CodePipelineUser"
+            },
+            "stageName": "Production"
+        }
+    ]
+}
