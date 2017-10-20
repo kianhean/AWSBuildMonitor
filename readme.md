@@ -1,5 +1,8 @@
 # Work In Progress for a build monitor for AWS Code Pipeline
 
+Quick and dirty way to get something better looking than the default
+
+
 ### Config AWS Cred
 aws configure
 
