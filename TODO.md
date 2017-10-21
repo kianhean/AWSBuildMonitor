@@ -1,2 +1,0 @@
-dashboard design
-auto refresh
