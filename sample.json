@@ -20,10 +20,10 @@
         {
             "actionStates": [
                 {
-                    "actionName": "Deploy-CodeDeploy-Application",
+                    "actionName": "Build",
                     "entityUrl": "https://console.aws.amazon.com/codedeploy/home?#",
                     "latestExecution": {
-                        "status": "Succeeded",
+                        "status": "InProgress",
                         "lastStatusChange": 1427298939.456,
                         "externalExecutionUrl": "https://console.aws.amazon.com/?#",
                         "externalExecutionId": "c53dbd42-This-Is-An-Example",
@@ -39,7 +39,7 @@
         {
             "actionStates": [
                 {
-                    "actionName": "Deploy-Second-Deployment",
+                    "actionName": "Staging",
                     "entityUrl": "https://console.aws.amazon.com/codedeploy/home?#",
                     "latestExecution": {
                         "status": "Failed",
