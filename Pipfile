@@ -5,8 +5,9 @@ name = "pypi"
 
 [packages]
 
-Flask = "*"
+flask = "*"
 "boto3" = "*"
+timeago = "*"
 
 
 [dev-packages]

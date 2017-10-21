@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "dd2a55f6dff92acd40016805dcbf36f9a3b885a539f89b429266bcd0709705a9"
+            "sha256": "1b7baf76931cf080a99f311f07ce35c5608e3e92ee11423c67030d984a4eaa98"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -38,10 +38,10 @@
         },
         "botocore": {
             "hashes": [
-                "sha256:bfc761e3e2cacbd365ac835ba5ce0b856a99c776e35f86be457f98062a3de829",
-                "sha256:0854c4a6c61aa96e28e91d60373af524227347efbbfed9c2966797f4a149a51a"
+                "sha256:37e10509df468c11b479339d52c27e7647fe4f1b92bd098b7253f6a6d41b071c",
+                "sha256:2a669d113f9e3b1f9ddab280e641e71bc62c78c07c75d73d939409fae4152de1"
             ],
-            "version": "==1.7.32"
+            "version": "==1.7.33"
         },
         "click": {
             "hashes": [
@@ -111,6 +111,12 @@
                 "sha256:70e8a77beed4562e7f14fe23a786b54f6296e34344c23bc42f07b15018ff98e9"
             ],
             "version": "==1.11.0"
+        },
+        "timeago": {
+            "hashes": [
+                "sha256:c42a215088c7258b4f8b11f1809d450b2502ca121e4f83bb98e4652673b4bf0d"
+            ],
+            "version": "==1.0.7"
         },
         "werkzeug": {
             "hashes": [

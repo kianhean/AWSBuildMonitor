@@ -27,9 +27,18 @@ def get_pipeline_status():
 def parse_pipeline_status(dict_data):
     """ Parse State Json """
     pipeline_name = dict_data['pipelineName']
-    stages = dict_data['stageStates']
 
-    return {'Name': pipeline_name, 'Stages':stages}
+    blocks = {}
+    list_blocks = []
+
+    # Compile Data
+    for item in dict_data['stageStates']:
+        blocks['name'] = item['actionStates'][0]['actionName']
+        blocks['status'] = item['actionStates'][0]['latestExecution']['status']
+
+        list_blocks.append(blocks.copy())
+
+    return {'Name': pipeline_name, 'Stages':list_blocks}
 
 
 app = Flask(__name__)
@@ -40,7 +49,7 @@ def dashboard():
     """ Dashboard Live Page """
     data = get_pipeline_status()
     output = parse_pipeline_status(data)
-    return render_template('index.html', title=output['Name'])
+    return render_template('index.html', title=output['Name'], blocks=output['Stages'])
 
 @app.route("/test")
 def dashboard_test():
@@ -48,4 +57,5 @@ def dashboard_test():
     with open("sample.json") as json_data:
         data = json.load(json_data) # Load JSON File
         output = parse_pipeline_status(data)
-    return render_template('index.html', title=output['Name'])
+
+    return render_template('index.html', title=output['Name'], blocks=output['Stages'])
