@@ -5,9 +5,8 @@ name = "pypi"
 
 [packages]
 
-flask = "*"
+Flask = "*"
 "boto3" = "*"
-"flask-bootstrap" = "*"
 
 
 [dev-packages]

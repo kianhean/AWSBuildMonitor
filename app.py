@@ -1,5 +1,6 @@
 from flask import Flask
-from flask_bootstrap import Bootstrap
+from flask import render_template
+
 
 import boto3
 import json
@@ -32,14 +33,14 @@ def parse_pipeline_status(dict_data):
 
 
 app = Flask(__name__)
-Bootstrap(app)
+
 
 @app.route("/")
 def dashboard():
     """ Dashboard Live Page """
     data = get_pipeline_status()
     output = parse_pipeline_status(data)
-    return output['Name']
+    return render_template('index.html', title=output['Name'])
 
 @app.route("/test")
 def dashboard_test():
@@ -47,4 +48,4 @@ def dashboard_test():
     with open("sample.json") as json_data:
         data = json.load(json_data) # Load JSON File
         output = parse_pipeline_status(data)
-    return output['Name']
+    return render_template('index.html', title=output['Name'])
