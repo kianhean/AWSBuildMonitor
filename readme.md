@@ -5,7 +5,9 @@ Quick and dirty way to get something better looking than the default
 
 ### Clone this Repo
 git clone https://github.com/kianhean/AWSBuildMonitor.git
+
 pipenv install
+
 pipenv shell
 
 ### Config AWS Cred
