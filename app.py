@@ -1,7 +1,8 @@
 from flask import Flask
 from flask import render_template
 
-
+import datetime
+import timeago
 import boto3
 import json
 import configparser
@@ -36,6 +37,10 @@ def parse_pipeline_status(dict_data):
         blocks['name'] = item['actionStates'][0]['actionName']
         blocks['status'] = item['actionStates'][0]['latestExecution']['status']
 
+        # Get Human Readable Timeago
+        last = item['actionStates'][0]['latestExecution']['lastStatusChange']
+        blocks['last'] = timeago.format(last, datetime.datetime.now())
+
         list_blocks.append(blocks.copy())
 
     return {'Name': pipeline_name, 'Stages':list_blocks}
@@ -55,7 +60,11 @@ def dashboard():
 def dashboard_test():
     """ Dashboard Test Page """
     with open("sample.json") as json_data:
-        data = json.load(json_data) # Load JSON File
+        # Load JSON File  and Mock Output
+        data = json.load(json_data)
+        for time_last in data['stageStates']:
+
+            time_last['actionStates'][0]['latestExecution']['lastStatusChange'] = datetime.date.today()
         output = parse_pipeline_status(data)
 
     return render_template('index.html', title=output['Name'], blocks=output['Stages'])
