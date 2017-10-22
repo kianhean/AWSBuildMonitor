@@ -21,8 +21,8 @@ def get_pipeline_status():
 
     pipelinename = config['development']['pipelinename']
 
-    client = boto3.client(pipelinename)
-    return client.get_pipeline_state(pipelinename)
+    client = boto3.client('codepipeline')
+    return client.get_pipeline_state(name=pipelinename)
 
 
 def parse_pipeline_status(dict_data):
