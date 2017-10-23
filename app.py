@@ -2,7 +2,7 @@ from flask import Flask
 from flask import render_template
 
 import datetime
-import timeago
+import arrow
 import boto3
 import json
 import configparser
@@ -39,7 +39,7 @@ def parse_pipeline_status(dict_data):
 
         # Get Human Readable Timeago
         last = item['actionStates'][0]['latestExecution']['lastStatusChange']
-        blocks['last'] = timeago.format(last, datetime.datetime.now())
+        blocks['last'] = (arrow.get(last)).humanize()
 
         list_blocks.append(blocks.copy())
 

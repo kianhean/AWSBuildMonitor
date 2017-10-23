@@ -7,7 +7,7 @@ name = "pypi"
 
 flask = "*"
 "boto3" = "*"
-timeago = "*"
+arrow = "*"
 
 
 [dev-packages]
