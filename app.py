@@ -35,11 +35,18 @@ def parse_pipeline_status(dict_data):
     # Compile Data
     for item in dict_data['stageStates']:
         blocks['name'] = item['actionStates'][0]['actionName']
-        blocks['status'] = item['actionStates'][0]['latestExecution']['status']
 
-        # Get Human Readable Timeago
-        last = item['actionStates'][0]['latestExecution']['lastStatusChange']
-        blocks['last'] = (arrow.get(last)).humanize()
+        try:
+            blocks['status'] = item['actionStates'][0]['latestExecution']['status']
+        except:
+            blocks['status'] = 'InProgress'
+
+        # Get Human Readable Arrow
+        try:
+            last = item['actionStates'][0]['latestExecution']['lastStatusChange']
+            blocks['last'] = (arrow.get(last)).humanize()
+        except:
+            blocks['last'] = 'Never'
 
         list_blocks.append(blocks.copy())
 
