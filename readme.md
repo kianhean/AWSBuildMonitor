@@ -1,7 +1,7 @@
 # Build monitor for AWS Code Pipeline (WIP)
 Quick and dirty way to get something better looking than the default
 
-![screens](https://user-images.githubusercontent.com/5037305/31857695-bf902b18-b717-11e7-8d80-57521dcc10c2.png)
+![screens](https://user-images.githubusercontent.com/5037305/31896530-9958ee8c-b846-11e7-920f-17562fae6af9.png)
 
 ### Clone this Repo
 git clone https://github.com/kianhean/AWSBuildMonitor.git
