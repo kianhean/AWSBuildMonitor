@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Build Monitor</title>
+    <title>{{title}} Build Monitor</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta http-equiv="refresh" content="10" >    
@@ -16,7 +16,7 @@
     <br/>
     <br/>
     <div class="starter-template">
-        <h1 class="text-white">{{title}} Build Monitor</h1>
+        <h1 class="text-white"><i class="fa fa-sun-o" aria-hidden="true"></i> {{title}} Build Monitor</h1>
         <p class="lead"></p>
     </div>
     <br/>
@@ -33,11 +33,9 @@
             <div class="card text-white bg-primary">
         {% endif %}
 
+        <div class="card-header"><b>{{stage.name}}</b></div>
         <div class="card-body">
-        <p class="card-title"><b>{{stage.name}}</b></p>
-        <br/>
         <p class="card-text">{{stage.status}}
-
         {% if stage.status == 'Succeeded' %}
         <i class="fa fa-check-circle" aria-hidden="true"></i>                    
         {% elif stage.status == 'Failed' %}
