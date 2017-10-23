@@ -4,19 +4,22 @@
     <title>Build Monitor</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta http-equiv="refresh" content="5" >    
+    <meta http-equiv="refresh" content="10" >    
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
   </head>
   <body style="background-color:black">
     <main role="main" class="container">
+    <br/>
     <br/>
     <div class="starter-template">
         <h1 class="text-white">{{title}} Build Monitor</h1>
         <p class="lead"></p>
     </div>
+    <br/>
     <br/>
     <div class="card-deck">
 
@@ -31,7 +34,15 @@
                 <div class="card-body">
                 <p class="card-title"><b>{{stage.name}}</b></p>
                 <br/>
-                <p class="card-text">{{stage.status}}</p>
+                <p class="card-text">{{stage.status}}
+                    {% if stage.status == 'Succeeded' %}
+                    <i class="fa fa-check-circle" aria-hidden="true"></i>                    
+                    {% elif stage.status == 'Failed' %}
+                    <i class="fa fa-frown-o" aria-hidden="true"></i>
+                    {% else %}
+                    <i class="fa fa-spinner" aria-hidden="true"></i>
+                    {% endif %}
+                </p>
                 </div>
                 <div class="card-footer">
                 <small class="text-white small">Last updated {{stage.last}}</small>
