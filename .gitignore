@@ -2,6 +2,7 @@
 # Created by https://www.gitignore.io/api/python,visualstudiocode
 .DS_store
 .vscode
+enviroment.ini
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
