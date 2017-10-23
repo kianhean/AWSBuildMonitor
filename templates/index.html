@@ -24,6 +24,7 @@
     <div class="card-deck">
 
         {% for stage in blocks %}
+
         {% if stage.status == 'Succeeded' %}
            <div class="card text-white bg-success">
         {% elif stage.status == 'Failed' %}
@@ -31,22 +32,31 @@
         {% else %}
             <div class="card text-white bg-primary">
         {% endif %}
-                <div class="card-body">
-                <p class="card-title"><b>{{stage.name}}</b></p>
-                <br/>
-                <p class="card-text">{{stage.status}}
-                    {% if stage.status == 'Succeeded' %}
-                    <i class="fa fa-check-circle" aria-hidden="true"></i>                    
-                    {% elif stage.status == 'Failed' %}
-                    <i class="fa fa-frown-o" aria-hidden="true"></i>
-                    {% else %}
-                    <i class="fa fa-spinner" aria-hidden="true"></i>
-                    {% endif %}
-                </p>
-                </div>
-                <div class="card-footer">
-                <small class="text-white small">Last updated {{stage.last}}</small>
-                </div>
+
+        <div class="card-body">
+        <p class="card-title"><b>{{stage.name}}</b></p>
+        <br/>
+        <p class="card-text">{{stage.status}}
+
+        {% if stage.status == 'Succeeded' %}
+        <i class="fa fa-check-circle" aria-hidden="true"></i>                    
+        {% elif stage.status == 'Failed' %}
+        <i class="fa fa-frown-o" aria-hidden="true"></i>
+        {% else %}
+        <i class="fa fa-spinner" aria-hidden="true"></i>
+        {% endif %}
+        </p>
+        {% if stage.status == 'Succeeded' %}
+        <small class="small">Easy...</small>
+        {% elif stage.status == 'Failed' %}
+        <small class="small">Error Message : {{stage.error_msg}}</small>
+        {% else %}
+        <small class="small">Building in Progress</small>
+        {% endif %}
+        </div>
+        <div class="card-footer">
+        <small class="text-white small">Last updated {{stage.last}}</small>
+        </div>
             </div>
 
         {% endfor %}

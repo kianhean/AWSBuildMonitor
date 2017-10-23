@@ -14,7 +14,7 @@ pipenv shell
 aws configure
 
 ### Edit enviroment.ini
-Add enviroment.ini with pipeline name
+Add enviroment.ini.sample with pipeline name and save file as enviroment.ini
 
 ### Run
 FLASK_APP=app.py flask run

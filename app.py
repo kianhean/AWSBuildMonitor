@@ -48,6 +48,9 @@ def parse_pipeline_status(dict_data):
         except:
             blocks['last'] = 'Never'
 
+        if blocks['status'] == 'Failed':
+            blocks['error_msg'] = item['actionStates'][0]['latestExecution']['errorDetails']['message']
+
         list_blocks.append(blocks.copy())
 
     return {'Name': pipeline_name, 'Stages':list_blocks}
