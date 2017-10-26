@@ -10,8 +10,11 @@ pipenv install
 
 ### Config AWS Cred
 Intall AWS CLI on computer
+
 run command aws configure and enter credentials
+
 ensure crendtials have sufficient permissions
+
 get_pipeline_state
 
 ### Edit enviroment.ini
@@ -19,6 +22,7 @@ Add enviroment.ini.sample with pipeline name and save file as enviroment.ini
 
 ### Run
 pipenv shell
+
 FLASK_APP=app.py flask run
 
 
