@@ -73,7 +73,6 @@ def dashboard_test():
         # Load JSON File  and Mock Output
         data = json.load(json_data)
         for time_last in data['stageStates']:
-
             time_last['actionStates'][0]['latestExecution']['lastStatusChange'] = datetime.date.today()
         output = parse_pipeline_status(data)
 
