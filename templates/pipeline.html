@@ -24,6 +24,17 @@
     <i class="fa fa-spinner" aria-hidden="true"></i>
     {% endif %}
     </p>
+
+
+    {% if stage.percentage == 'Unknown' %}
+
+    {% else %}
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="{{stage.percentage}}" aria-valuemin="0" aria-valuemax="100" style="width: {{stage.percentage}}%">{{stage.percentage}}%</div>
+    </div>
+    <br/>
+    {% endif %}
+
     {% if stage.status == 'Succeeded' %}
     <small class="small">Easy...</small>
     {% elif stage.status == 'Failed' %}

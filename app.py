@@ -41,6 +41,11 @@ def parse_pipeline_status(dict_data):
         except:
             blocks['status'] = 'InProgress'
 
+        try:
+            blocks['percentage'] = item['actionStates'][0]['latestExecution']['percentComplete']
+        except:
+            blocks['percentage'] = 'Unknown'
+
         # Get Human Readable Arrow
         try:
             last = item['actionStates'][0]['latestExecution']['lastStatusChange']

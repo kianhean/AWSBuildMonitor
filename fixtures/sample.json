@@ -24,6 +24,7 @@
                     "entityUrl": "https://console.aws.amazon.com/codedeploy/home?#",
                     "latestExecution": {
                         "status": "InProgress",
+                        "percentComplete": 40,
                         "lastStatusChange": 1427298939.456,
                         "externalExecutionUrl": "https://console.aws.amazon.com/?#",
                         "externalExecutionId": "c53dbd42-This-Is-An-Example",
@@ -43,6 +44,7 @@
                     "entityUrl": "https://console.aws.amazon.com/codedeploy/home?#",
                     "latestExecution": {
                         "status": "Failed",
+                        "percentComplete": 100,
                         "errorDetails": {
                             "message": "Deployment Group is already deploying deployment ...",
                             "code": "JobFailed"
