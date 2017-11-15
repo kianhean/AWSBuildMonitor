@@ -64,7 +64,7 @@ def dashboard():
     """ Dashboard Live Page """
     data = get_pipeline_status()
     output = parse_pipeline_status(data)
-    return render_template('index.html', title=output['Name'], blocks=output['Stages'])
+    return render_template('pipeline.html', title=output['Name'], blocks=output['Stages'])
 
 @app.route("/test")
 def dashboard_test():
@@ -76,4 +76,4 @@ def dashboard_test():
             time_last['actionStates'][0]['latestExecution']['lastStatusChange'] = datetime.date.today()
         output = parse_pipeline_status(data)
 
-    return render_template('index.html', title=output['Name'], blocks=output['Stages'])
+    return render_template('pipeline.html', title=output['Name'], blocks=output['Stages'])
