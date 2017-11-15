@@ -13,9 +13,11 @@ Intall AWS CLI on computer
 
 run command aws configure and enter credentials
 
-ensure crendtials have sufficient permissions
+ensure crendtials have sufficient permissions, namely
 
 get_pipeline_state
+
+for the resource
 
 ### Edit enviroment.ini
 Add enviroment.ini.sample with pipeline name and save file as enviroment.ini
