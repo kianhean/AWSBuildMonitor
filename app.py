@@ -75,8 +75,11 @@ def dashboard():
 def dashboard_test():
     """ Dashboard Test Page """
     with open("fixtures/sample.json") as json_data:
+
         # Load JSON File  and Mock Output
         data = json.load(json_data)
+
+        # Convert Datetime to Python Datetime to Simulate Boto3
         for time_last in data['stageStates']:
             time_last['actionStates'][0]['latestExecution']['lastStatusChange'] = datetime.date.today()
         output = parse_pipeline_status(data)
