@@ -69,7 +69,7 @@ def dashboard():
 @app.route("/test")
 def dashboard_test():
     """ Dashboard Test Page """
-    with open("sample.json") as json_data:
+    with open("fixtures/sample.json") as json_data:
         # Load JSON File  and Mock Output
         data = json.load(json_data)
         for time_last in data['stageStates']:

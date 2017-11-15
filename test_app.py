@@ -12,7 +12,7 @@ class TestParsingMethods(unittest.TestCase):
 
     def test_parse_jason_response(self):
         """ Mock Using Local Json """
-        with open("sample.json") as json_data:
+        with open("fixtures/sample.json") as json_data:
             data = json.load(json_data)
         output = app.parse_pipeline_status(data)
         self.assertEqual(output['Name'], 'MyFirstPipeline')
