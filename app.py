@@ -7,20 +7,25 @@ import boto3
 import json
 import configparser
 
+def loop_pipines(pipelines):
+    """ Given List of Pipes, Return the Stages """
+    pipes = []
 
-def get_pipeline_status():
+    for pipe in pipelines:
+        data = get_pipeline_status(pipe)
+        output = parse_pipeline_status(data)
+
+        pipes.append(output)
+
+    return pipes
+
+
+def get_pipeline_status(pipelinename):
     """ Get Pipeline State From Config File
     http://boto3.readthedocs.io/en/latest/reference/services/codepipeline.html#CodePipeline.Client.get_pipeline_state
     Returns : Dictionary
 
      """
-    # Set Keys from Config
-    config = configparser.ConfigParser()
-    config.sections()
-    config.read('enviroment.ini')
-
-    pipelinename = config['development']['pipelinename']
-
     client = boto3.client('codepipeline')
     return client.get_pipeline_state(name=pipelinename)
 
@@ -66,22 +71,42 @@ app = Flask(__name__)
 
 @app.route("/")
 def dashboard():
+
     """ Dashboard Live Page """
-    data = get_pipeline_status()
-    output = parse_pipeline_status(data)
-    return render_template('pipeline.html', title=output['Name'], blocks=output['Stages'])
+    # Set Keys from Config
+    config = configparser.ConfigParser()
+    config.sections()
+    config.read('enviroment.ini')
 
-@app.route("/test")
+    pipelines = config['development']['pipelinename'].split(",")
+
+    # Build List of Pipelines
+    pipes = loop_pipines(pipelines)
+
+    return render_template('pipeline.html', pipes=pipes)
+
+@app.route("/local")
 def dashboard_test():
-    """ Dashboard Test Page """
-    with open("fixtures/sample.json") as json_data:
+    """ Dashboard Local Test Page """
 
-        # Load JSON File  and Mock Output
-        data = json.load(json_data)
+    # Set Keys from Config
+    config = configparser.ConfigParser()
+    config.sections()
+    config.read('enviroment.ini.sample')
 
-        # Convert Datetime to Python Datetime to Simulate Boto3
-        for time_last in data['stageStates']:
-            time_last['actionStates'][0]['latestExecution']['lastStatusChange'] = datetime.date.today()
-        output = parse_pipeline_status(data)
+    pipelines = config['development']['pipelinename'].split(",")
+    pipes = []
 
-    return render_template('pipeline.html', title=output['Name'], blocks=output['Stages'])
+    for pipe in pipelines:
+        with open("fixtures/" + pipe + ".json") as json_data:
+
+            # Load JSON File  and Mock Output
+            data = json.load(json_data)
+
+            # Convert Datetime to Python Datetime to Simulate Boto3
+            for time_last in data['stageStates']:
+                time_last['actionStates'][0]['latestExecution']['lastStatusChange'] = datetime.date.today()
+            output = parse_pipeline_status(data)
+            pipes.append(output)
+    print(pipes)
+    return render_template('pipeline.html', pipes=pipes)
