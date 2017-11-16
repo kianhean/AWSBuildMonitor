@@ -80,11 +80,12 @@ def dashboard():
 
     pipelines = config['development']['pipelinename'].split(",")
     projectname = config['development']['projectname']
+    refresh = config['development']['refresh']
 
     # Build List of Pipelines
     pipes = loop_pipines(pipelines)
 
-    return render_template('pipeline.html', pipes=pipes, projectname=projectname)
+    return render_template('pipeline.html', pipes=pipes, projectname=projectname, refresh=refresh)
 
 @app.route("/local")
 def dashboard_test():
@@ -97,6 +98,7 @@ def dashboard_test():
 
     pipelines = config['development']['pipelinename'].split(",")
     projectname = config['development']['projectname']
+    refresh = config['development']['refresh']
 
     # Gather Data for Local Page
     pipes = []
@@ -113,4 +115,4 @@ def dashboard_test():
             output = parse_pipeline_status(data)
             pipes.append(output)
 
-    return render_template('pipeline.html', pipes=pipes, projectname=projectname)
+    return render_template('pipeline.html', pipes=pipes, projectname=projectname, refresh=refresh)

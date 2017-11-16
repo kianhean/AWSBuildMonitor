@@ -36,6 +36,7 @@ Edit the enviroment.ini.sample and save file as enviroment.ini
 ```bash
 projectname = The Name of Your Project
 pipelinename = Name of your Piplines Seperated by Commas
+refresh = Number of seconds to wait before a force a forced refresh of the monitor
 ```
 
 ### Run

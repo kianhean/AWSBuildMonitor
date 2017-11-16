@@ -1,3 +1,4 @@
 [development]
 projectname = MyProject
 pipelinename = sample,sample2
+refresh = 10
