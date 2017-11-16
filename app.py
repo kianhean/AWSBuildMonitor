@@ -79,11 +79,12 @@ def dashboard():
     config.read('enviroment.ini')
 
     pipelines = config['development']['pipelinename'].split(",")
+    projectname = config['development']['projectname']
 
     # Build List of Pipelines
     pipes = loop_pipines(pipelines)
 
-    return render_template('pipeline.html', pipes=pipes)
+    return render_template('pipeline.html', pipes=pipes, projectname=projectname)
 
 @app.route("/local")
 def dashboard_test():
@@ -95,6 +96,9 @@ def dashboard_test():
     config.read('enviroment.ini.sample')
 
     pipelines = config['development']['pipelinename'].split(",")
+    projectname = config['development']['projectname']
+
+    # Gather Data for Local Page
     pipes = []
 
     for pipe in pipelines:
@@ -108,5 +112,5 @@ def dashboard_test():
                 time_last['actionStates'][0]['latestExecution']['lastStatusChange'] = datetime.date.today()
             output = parse_pipeline_status(data)
             pipes.append(output)
-    print(pipes)
-    return render_template('pipeline.html', pipes=pipes)
+
+    return render_template('pipeline.html', pipes=pipes, projectname=projectname)
