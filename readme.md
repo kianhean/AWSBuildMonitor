@@ -22,9 +22,13 @@ pipenv install
 ### Config AWS Credentials
 Intall AWS CLI on computer
 
-run command aws configure and enter credentials
+Run 
 
-ensure crendtials have sufficient permissions, namely "get_pipeline_state" for the resource in question.
+```
+aws configure
+```
+
+Ensure that credentials have sufficient permissions, namely "get_pipeline_state" for the resource in question.
 
 ### Edit enviroment.ini
 Edit the enviroment.ini.sample and save file as enviroment.ini
