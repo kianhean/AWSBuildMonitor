@@ -7,14 +7,15 @@ import boto3
 import json
 import configparser
 
+
 def loop_pipines(pipelines):
     """ Given List of Pipes, Return the Stages """
     pipes = []
 
     for pipe in pipelines:
         data = get_pipeline_status(pipe)
+        # print(data)
         output = parse_pipeline_status(data)
-
         pipes.append(output)
 
     return pipes
@@ -39,31 +40,39 @@ def parse_pipeline_status(dict_data):
 
     # Compile Data
     for item in dict_data['stageStates']:
-        blocks['name'] = item['actionStates'][0]['actionName']
 
-        try:
-            blocks['status'] = item['actionStates'][0]['latestExecution']['status']
-        except:
-            blocks['status'] = 'InProgress'
+        for action in item['actionStates']:
 
-        try:
-            blocks['percentage'] = item['actionStates'][0]['latestExecution']['percentComplete']
-        except:
-            blocks['percentage'] = 'Unknown'
+            blocks['name'] = action['actionName']
 
-        # Get Human Readable Arrow
-        try:
-            last = item['actionStates'][0]['latestExecution']['lastStatusChange']
-            blocks['last'] = (arrow.get(last)).humanize()
-        except:
-            blocks['last'] = 'Never'
+            try:
+                blocks['status'] = action['latestExecution']['status']
+            except:
+                blocks['status'] = 'InProgress'
 
-        if blocks['status'] == 'Failed':
-            blocks['error_msg'] = item['actionStates'][0]['latestExecution']['errorDetails']['message']
+            try:
+                blocks['percentage'] = action['latestExecution']['percentComplete']
+            except:
+                blocks['percentage'] = 'Unknown'
 
-        list_blocks.append(blocks.copy())
+            # Get Human Readable Arrow
+            try:
+                last = action['latestExecution']['lastStatusChange']
+                blocks['last'] = (arrow.get(last)).humanize()
+            except:
+                blocks['last'] = 'Never'
 
-    return {'Name': pipeline_name, 'Stages':list_blocks}
+            if blocks['status'] == 'Failed':
+                if 'errorDetails' in action['latestExecution']:
+                    blocks['error_msg'] = action['latestExecution']['errorDetails']['message']
+                elif 'summary' in action['latestExecution']:
+                    blocks['error_msg'] = action['latestExecution']['summary']
+                else:
+                    blocks['error_msg'] = 'Unknown :('
+
+            list_blocks.append(blocks.copy())
+
+    return {'Name': pipeline_name, 'Stages': list_blocks}
 
 
 app = Flask(__name__)
@@ -71,7 +80,6 @@ app = Flask(__name__)
 
 @app.route("/")
 def dashboard():
-
     """ Dashboard Live Page """
     # Set Keys from Config
     config = configparser.ConfigParser()
@@ -86,6 +94,7 @@ def dashboard():
     pipes = loop_pipines(pipelines)
 
     return render_template('pipeline.html', pipes=pipes, projectname=projectname, refresh=refresh)
+
 
 @app.route("/local")
 def dashboard_test():
